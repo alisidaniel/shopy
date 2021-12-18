@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
     UsersModule,
+    ProductModule,
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: ':memory:',
@@ -12,7 +14,5 @@ import { UsersModule } from './users/users.module';
       synchronize: true,
     }),
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}
