@@ -9,14 +9,14 @@ import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [
-    UsersModule,
-    ProductModule,
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: ':memory:',
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
+    UsersModule,
+    ProductModule,
     CategoryModule,
     CatModule,
     OrderModule,
