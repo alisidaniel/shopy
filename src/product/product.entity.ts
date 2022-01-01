@@ -1,7 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
 import { IsInt, IsDate, Min, Max } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { Order } from '../order/entities/order.entity';
+import { Order } from '../order/order.entity';
+import { User } from '../users/user.entity';
 
 @Entity()
 export class Product {
@@ -31,7 +38,11 @@ export class Product {
   @Max(10)
   rating: number;
 
-  @ApiProperty()
+  @ApiProperty({ type: () => User })
+  @ManyToOne(() => User, (user) => user.products)
+  user: User;
+
+  @ApiProperty({ type: () => Order })
   @OneToMany(() => Order, (order) => order.product)
   orders?: Order[];
 

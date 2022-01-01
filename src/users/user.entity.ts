@@ -1,8 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { Length, IsEmail, IsDate, Min, Max } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { Order } from 'src/order/entities/order.entity';
-import { Cat } from 'src/cat/entities/cat.entity';
+import { Order } from '../order/order.entity';
+import { Cat } from '../cat/cat.entity';
+import { Product } from '../product/product.entity';
 
 @Entity()
 export class User {
@@ -35,11 +36,15 @@ export class User {
   @Column()
   phone: number;
 
-  @ApiProperty()
+  @ApiProperty({ type: () => Product })
+  @OneToMany(() => Product, (product) => product.user)
+  products?: Product[];
+
+  @ApiProperty({ type: () => Order })
   @OneToMany(() => Order, (order) => order.user)
   orders?: Order[];
 
-  @ApiProperty()
+  @ApiProperty({ type: () => Cat })
   @OneToMany(() => Cat, (cat) => cat.user)
   cats?: Cat[];
 

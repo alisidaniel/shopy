@@ -1,19 +1,19 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { IsDate } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { User } from '../../users/user.entity';
-import { Product } from '../../product/product.entity';
+import { User } from '../users/user.entity';
+import { Product } from '../product/product.entity';
 
-Entity();
+@Entity()
 export class Order {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ApiProperty()
+  @ApiProperty({ type: () => User })
   @ManyToOne(() => User, (user) => user.orders)
   user: User;
 
-  @ApiProperty()
+  @ApiProperty({ type: () => Product })
   @ManyToOne(() => Product, (product) => product.orders)
   product: Product;
 
