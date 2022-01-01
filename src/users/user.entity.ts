@@ -29,12 +29,12 @@ export class User {
 
   @ApiProperty()
   @Column({ unique: true })
-  photo: string;
+  photo?: string;
 
   @ApiProperty()
   @Length(4, 15)
   @Column()
-  phone: number;
+  phone?: number;
 
   @ApiProperty({ type: () => Product })
   @OneToMany(() => Product, (product) => product.user)
