@@ -19,6 +19,7 @@ export class UsersService {
   async findById(id: number): Promise<User> {
     try {
       const user = this.userRepository.findOneOrFail(id);
+      console.log('hello am testing', user);
       return user;
     } catch (error) {
       throw error;

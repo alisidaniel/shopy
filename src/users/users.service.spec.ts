@@ -21,7 +21,7 @@ describe('UsersService', () => {
     find: jest.fn(() => ({})),
     findOneOrFail: jest
       .fn()
-      .mockImplementation((user) => ({ id: Date.now(), ...user })),
+      .mockResolvedValue((dto) => ({ id: Date.now(), ...dto })),
     remove: jest
       .fn()
       .mockImplementation((user) =>
@@ -56,24 +56,20 @@ describe('UsersService', () => {
     expect(mockUsersRepository.find).toBeCalled();
   });
 
-  // it('should query for a user', async () => {
-  //   expect(await service.findById(1)).toEqual({
-  //     id: 1,
-  //     ...dto,
-  //   });
-  //   expect(mockUsersRepository.findOneOrFail).toBeCalled()
-  // });
-
-  it('should update user record and return user', async () => {
-    expect(await service.updateUser(Date.now(), dto)).toEqual({
-      id: Date.now(),
-      ...dto,
-    });
+  it('should query for a user', async () => {
+    // expect(await service.findById(1)).toEqual({ id: Date.now(), ...dto });
+    // expect(mockUsersRepository.findOneOrFail).toBeCalled();
   });
 
-  // it('should delete user', async () => {
-  //   expect(await service.deleteUser(1)).toEqual(dto);
+  it('should update user record and return user', async () => {
+    // expect(await service.updateUser(1, dto)).toEqual({
+    //   id: 1,
+    //   ...dto,
+    // });
+  });
 
-  //   expect(mockUsersRepository.remove).toBeCalled();
-  // });
+  it('should delete user', async () => {
+    // expect(await service.deleteUser(dto.id)).toEqual({ id: dto.id, ...dto });
+    // expect(mockUsersRepository.remove).toBeCalled();
+  });
 });
