@@ -38,6 +38,11 @@ spec:
                 secretKeyFrom:
                   name: mysql-secret
                   key: mysql-password
+            - name: MYSQL_HOST
+              valueFrom:
+                configMapKeyFrom:
+                  name: mysql-configmap
+                  key: mysql_host
           resources:
             limits:
               memory: '128Mi'
