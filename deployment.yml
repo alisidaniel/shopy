@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shopy-deployment
+  labels:
+    app: shopy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shopy
+  template:
+    metadata:
+      labels:
+        app: shopy
+    spec:
+      containers:
+        - name: shopyserver
+          image: <Image>
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyFrom:
+                  name: mysql-secret
+                  key: mysql-root-password
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyFrom:
+                  name: mysql-configmap
+                  key: mysql_database
+            - name: MYSQL_USER
+              valueFrom:
+                configMapKeyFrom:
+                  name: mysql-configmap
+                  key: mysql_user
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyFrom:
+                  name: mysql-secret
+                  key: mysql-password
+          resources:
+            limits:
+              memory: '128Mi'
+              cpu: '500m'
+          ports:
+            - containerPort: 3000
