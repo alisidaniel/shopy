@@ -20,27 +20,27 @@ spec:
           env:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
-                secretKeyFrom:
+                secretKeyRef:
                   name: mysql-secret
                   key: mysql-root-password
             - name: MYSQL_DATABASE
               valueFrom:
-                configMapKeyFrom:
+                configMapKeyRef:
                   name: mysql-configmap
                   key: mysql_database
             - name: MYSQL_USER
               valueFrom:
-                configMapKeyFrom:
+                configMapKeyRef:
                   name: mysql-configmap
                   key: mysql_user
             - name: MYSQL_PASSWORD
               valueFrom:
-                secretKeyFrom:
+                secretKeyRef:
                   name: mysql-secret
                   key: mysql-password
             - name: MYSQL_HOST
               valueFrom:
-                configMapKeyFrom:
+                configMapKeyRef:
                   name: mysql-configmap
                   key: mysql_host
           resources:
