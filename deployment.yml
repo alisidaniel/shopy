@@ -16,31 +16,36 @@ spec:
     spec:
       containers:
         - name: shopyserver
-          image: <Image>
+          image: danikeys/shopy:latest
           env:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
-                secretKeyFrom:
+                secretKeyRef:
                   name: mysql-secret
                   key: mysql-root-password
             - name: MYSQL_DATABASE
               valueFrom:
-                configMapKeyFrom:
+                configMapKeyRef:
                   name: mysql-configmap
                   key: mysql_database
             - name: MYSQL_USER
               valueFrom:
-                configMapKeyFrom:
+                configMapKeyRef:
                   name: mysql-configmap
                   key: mysql_user
             - name: MYSQL_PASSWORD
               valueFrom:
-                secretKeyFrom:
+                secretKeyRef:
                   name: mysql-secret
                   key: mysql-password
+            - name: MYSQL_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-configmap
+                  key: mysql_host
           resources:
-            limits:
-              memory: '128Mi'
-              cpu: '500m'
+            # limits:
+            #   memory: '128Mi'
+            #   cpu: '500m'
           ports:
             - containerPort: 3000
